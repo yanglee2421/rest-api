@@ -1,0 +1,29 @@
+{
+  "include": ["src"],
+  "compilerOptions": {
+    // Private
+    "baseUrl": ".",
+    "paths": { "@/*": ["src/*"] },
+
+    // Build
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": ["ESNext"],
+    "skipLibCheck": true,
+
+    // Linting
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    // TypeORM
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  }
+}

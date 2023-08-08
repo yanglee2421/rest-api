@@ -5,19 +5,9 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "nodemon --exec tsx src/main.ts",
-    "build": "tsx scripts/build",
-    "serve": "node dist/main.min"
+    "dev": "nodemon --exec tsx src/main.ts"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.8",
-    "@babel/preset-env": "^7.22.7",
-    "@babel/preset-typescript": "^7.22.5",
-    "@rollup/plugin-alias": "^5.0.0",
-    "@rollup/plugin-babel": "^6.0.3",
-    "@rollup/plugin-node-resolve": "^15.1.0",
-    "@rollup/plugin-terser": "^0.4.3",
-    "@types/babel__core": "^7.20.1",
     "@types/formidable": "^2.0.6",
     "@types/koa": "^2.13.6",
     "@types/koa-bodyparser": "^4.3.10",
@@ -25,8 +15,7 @@
     "@types/koa__cors": "^4.0.0",
     "@types/koa__router": "^12.0.0",
     "@types/node": "^20.4.1",
-    "nodemon": "^2.0.22",
-    "rollup": "^3.26.2",
+    "nodemon": "^3.0.1",
     "tsx": "^3.12.7",
     "typescript": "^5.1.6"
   },

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { useDB, useSign } from "@/hooks";
+import { useDB } from "@/hooks";
 import { User } from "@/hooks/useDB/entity";
 
 export const login = Router();
@@ -16,7 +16,7 @@ useDB((db) => {
     if (!isPassed) throw new Error("用户名或密码错误");
     return res.json({
       isOk: true,
-      token: useSign({ username, password }),
+      // token: useSign({ username, password }),
       username,
       invalidTime: Date.now() + 1000 * 3600 * 24 * 7,
     });

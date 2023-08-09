@@ -23,8 +23,9 @@ import {
 
 // ** App
 const app = express();
-createServer(app).listen(80, () => {
-  console.info("standing by");
+const port = 3002;
+createServer(app).listen(port, () => {
+  console.info("standing by", port);
 });
 
 // ** Middleware

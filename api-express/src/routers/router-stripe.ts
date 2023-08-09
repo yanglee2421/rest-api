@@ -31,3 +31,22 @@ routerStripe.get("", async (req, res) => {
   console.log(session.url);
   res.redirect(session.url || "");
 });
+
+routerStripe.post("", async (req, res) => {
+  // Get Customers
+  const cus = await stripe.customers.list();
+  const customer = cus.data[0].id;
+
+  // Get Redirect URL
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ["card"],
+    mode: "setup",
+    customer,
+    success_url: "https://example.com/success?session_id={CHECKOUT_SESSION_ID}",
+    cancel_url: "https://example.com/cancel",
+  });
+
+  // Redirect Response
+  console.log(session.url);
+  res.send(session.url || "");
+});

@@ -1,6 +1,13 @@
-import fs from "fs/promises";
-import path from "path";
+// NodeJs Imports
+import fs from "node:fs/promises";
+import path, { dirname } from "node:path";
+
+// Express Imports
 import type { RequestHandler } from "express";
+import { fileURLToPath } from "node:url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 export function uselog(): RequestHandler {
   return (req, res, next) => {
     const date = new Date().toLocaleString("zh-CN", {

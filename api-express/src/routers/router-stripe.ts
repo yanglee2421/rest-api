@@ -13,13 +13,15 @@ const stripe = new Stripe(apiKey, {
 
 export const routerStripe = Router();
 
-routerStripe.get("", async (req, res) => {
-  // Get Customers
-  const cusList = await stripe.customers.search({
-    query: "email:'yanglee2421@gmail.com'",
-    limit: 1,
-  });
-  console.log(cusList);
+routerStripe.get("/", async (req, res) => {
+  void req;
+
+  // Get Customer
+  // const cusList = await stripe.customers.search({
+  //   query: "email:'yanglee2421@gmail.com'",
+  //   limit: 1,
+  // });
+  // console.log(cusList);
 
   const cus = await stripe.customers.create({
     email: "yanglee2421@gmail.com",
@@ -31,7 +33,7 @@ routerStripe.get("", async (req, res) => {
   });
   const customer = cus.id;
 
-  // Get Redirect URL
+  // Get Payment Link
   const session = await stripe.checkout.sessions.create({
     // payment_intent_data: {
     //   setup_future_usage: "off_session",
@@ -44,10 +46,30 @@ routerStripe.get("", async (req, res) => {
       },
     ],
     mode: "subscription",
-    success_url: "https://warpdriven.ai/zh_CN/login/?from=stripe",
+
+    // 支付完成后stripe跳转的URL（网页的地址）
+    success_url: "localhost:3002/stripe/webhook",
   });
 
-  console.log(session);
-
   res.send({ link: session.url });
+});
+
+// Stripe Webhook Endpoint
+routerStripe.post("/webhook", (req, res) => {
+  const endpointSecret =
+    "whsec_41c5b5482f655b5cababb15caa8540509cf45d42d71e4bd41677c99772a3f7a7";
+
+  try {
+    const sig = req.headers["stripe-signature"];
+    if (typeof sig !== "string") throw new Error("Invalid stripe-signature");
+
+    const event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+    console.log(event);
+    // Do Something
+
+    res.send();
+  } catch (err: any) {
+    res.status(400).send(`Webhook Error: ${err.message}`);
+    return;
+  }
 });

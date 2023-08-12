@@ -1,21 +1,21 @@
 import { Router } from "express";
 
-interface Data {
-  images: any[];
-}
-
 /**
  * 重定向路由
  */
 export const redirect = Router();
-redirect.get("/redirect/*", async (req, res) => {
-  const bingUrl = "https://cn.bing.com";
-  const url = new URL("/HPImageArchive.aspx", bingUrl);
-  url.searchParams.set("format", "js");
-  url.searchParams.set("idx", "0");
-  url.searchParams.set("n", "1");
-  const $res = await fetch(url);
-  const data = (await $res.json()) as Data;
-  const { images } = data;
-  return res.redirect(bingUrl + images[0]);
+redirect.get("/redirect", async (req, res) => {
+  res.setHeader("Content-type", "application/octet-stream");
+  const text = "为什么电脑永远不会生病？因为它有Windows（窗户）可以通风。";
+  for (const chunk of text) {
+    await timeout();
+    res.write(chunk);
+  }
+  return res.end();
 });
+
+function timeout() {
+  return new Promise((res) => {
+    setTimeout(res, 200);
+  });
+}

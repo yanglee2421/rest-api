@@ -8,3 +8,4 @@ export { pwd } from "./router-pwd";
 export { joke } from "./router-joke";
 
 export * from "./router-stripe";
+export * from "./router-crawler";

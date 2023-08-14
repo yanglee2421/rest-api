@@ -19,6 +19,7 @@ import {
   pwd,
   joke,
   routerStripe,
+  routerCrawler,
 } from "@/routers";
 
 // ** App
@@ -42,6 +43,7 @@ app.use("/api", useCors(), file);
 app.use("/pwd", useCors(), pwd);
 app.use("/joke", useCors(), joke);
 app.use("/stripe", routerStripe);
+app.use(routerCrawler);
 
 // ** Static
 app.use(useGzip());

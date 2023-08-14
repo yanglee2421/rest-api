@@ -48,7 +48,7 @@ routerStripe.get("/", async (req, res) => {
     mode: "subscription",
 
     // 支付完成后stripe跳转的URL（网页的地址）
-    success_url: "localhost:3002/stripe/webhook",
+    success_url: "http://localhost:3002/stripe/webhook",
   });
 
   res.send({ link: session.url });
@@ -72,4 +72,12 @@ routerStripe.post("/webhook", (req, res) => {
     res.status(400).send(`Webhook Error: ${err.message}`);
     return;
   }
+});
+
+routerStripe.get("/test", (req, res) => {
+  // JSON
+  // res.json({});
+
+  //
+  res.redirect("http://xxxxx.com");
 });

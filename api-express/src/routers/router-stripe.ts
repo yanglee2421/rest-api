@@ -75,6 +75,7 @@ routerStripe.post("/webhook", (req, res) => {
 });
 
 routerStripe.get("/test", (req, res) => {
+  void req;
   // JSON
   // res.json({});
 

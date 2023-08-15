@@ -1,13 +1,12 @@
 // Router Imports
 import Router from "@koa/router";
 
-// Formidable Imports
-import formidable, { Fields, Files } from "formidable";
-
 // NodeJs Imports
 import { readFile, writeFile } from "node:fs/promises";
-import { IncomingMessage } from "node:http";
 import { resolve } from "node:path";
+
+// Utils Imports
+import { toParseForm } from "@/utils";
 
 // ** Router
 export const upload = new Router({ prefix: "/upload" });
@@ -16,7 +15,7 @@ export const upload = new Router({ prefix: "/upload" });
 upload.post("/base64", async (ctx, next) => {
   await next();
 
-  const { fields, files } = await toParse(ctx.req);
+  const { fields, files } = await toParseForm(ctx.req);
   const { file } = files;
   const f = Array.isArray(file) ? file.at(0) : file;
   if (!f) throw new Error("invalid file");
@@ -29,7 +28,7 @@ upload.post("/base64", async (ctx, next) => {
 
 upload.post("/save", async (ctx, next) => {
   await next();
-  const { fields, files } = await toParse(ctx.req);
+  const { fields, files } = await toParseForm(ctx.req);
   const { file } = files;
   const f = Array.isArray(file) ? file.at(0) : file;
   if (!f) throw new Error("invalid file");
@@ -41,20 +40,3 @@ upload.post("/save", async (ctx, next) => {
 
   ctx.body = { path, fields };
 });
-
-// Parse Form
-function toParse(req: IncomingMessage) {
-  // ** Form
-  const form = formidable({ maxFields: 1, maxFiles: 1 });
-
-  return new Promise<Data>((res, rej) => {
-    form.parse(req, (err, fields, files) => {
-      if (err) return rej(err);
-      return res({ fields, files });
-    });
-  });
-}
-interface Data {
-  fields: Fields;
-  files: Files;
-}

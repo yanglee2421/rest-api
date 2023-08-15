@@ -10,6 +10,8 @@ export function uselog(): RequestHandler {
   const __dirname = dirname(fileURLToPath(import.meta.url));
 
   return async (req, res, next) => {
+    console.log(req.path);
+
     const date = new Date().toLocaleString("zh-CN", {
       year: "numeric",
       month: "long",
@@ -19,12 +21,14 @@ export function uselog(): RequestHandler {
       minute: "2-digit",
       second: "2-digit",
     });
-    fs.writeFile(
+
+    await fs.writeFile(
       path.resolve(__dirname, "./log.txt"),
       `${date} ${req.path} ${req.method}\n`,
       { encoding: "utf-8", flag: "a" }
-    )
-      .then(() => next())
-      .catch(() => res.writeHead(500, "打 log 时挂了"));
+    );
+
+    void res;
+    next();
   };
 }

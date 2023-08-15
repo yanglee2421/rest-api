@@ -8,12 +8,12 @@ import { gzip, InputType } from "node:zlib";
 
 export function useGzip(): RequestHandler {
   return async (req, res, next) => {
-    console.log("gzip", req.url);
-
     try {
       // Only Handle CSS & JS
       const isCss = req.url.endsWith(".css");
       const isJs = req.url.endsWith(".js");
+      console.log(isCss, isJs);
+
       if (!isCss && !isJs) return next();
 
       // Not Allow Gzip

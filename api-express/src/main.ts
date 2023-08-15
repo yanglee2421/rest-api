@@ -32,23 +32,23 @@ createServer(app).listen(port, () => {
 // ** Middleware
 app.use(uselog());
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
 
 // ** Endpoints
 app.use(bing);
 app.use(redirect);
+app.use(routerCrawler);
+
 app.use("/auth", useCors(), login);
 app.use("/api", useCors(), file);
 app.use("/pwd", useCors(), pwd);
 app.use("/joke", useCors(), joke);
 app.use("/stripe", routerStripe);
-app.use(routerCrawler);
 
 // ** Static
 app.use(useGzip());
 const rootPath = process.cwd();
-console.log("root", rootPath);
 
 const publicPath = resolve(rootPath, "./public");
 app.use("/public", history(), express.static(publicPath));

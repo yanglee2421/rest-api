@@ -26,6 +26,6 @@ bing.get("/bing", async (req, res) => {
 
   return res.json({
     isOk: true,
-    rows,
+    rows: rows.data,
   });
 });

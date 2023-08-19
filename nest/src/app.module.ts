@@ -1,8 +1,6 @@
+// NestJs Imports
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
-// NodeJs Imports
-import { resolve } from 'node:path';
 
 // App Imports
 import { AppService } from './app.service';
@@ -11,6 +9,11 @@ import { AppController } from './app.controller';
 // Modules Imports
 import { CoffeeModule } from './coffee/coffee.module';
 import { BingModule } from './bing/bing.module';
+import { TableModule } from './table/table.module';
+
+// NodeJs Imports
+import { resolve } from 'node:path';
+import { FileModule } from './file/file.module';
 
 @Module({
   imports: [
@@ -23,6 +26,8 @@ import { BingModule } from './bing/bing.module';
     }),
     CoffeeModule,
     BingModule,
+    TableModule,
+    FileModule,
   ],
   providers: [AppService],
   controllers: [AppController],

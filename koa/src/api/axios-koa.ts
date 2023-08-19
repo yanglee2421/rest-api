@@ -1,12 +1,12 @@
 import axios, { AxiosError } from "axios";
 
-export const request = axios.create({
+export const axiosKoa = axios.create({
   baseURL: "",
   timeout: 1000 * 60,
 });
 
-request.interceptors.request.use((config) => config);
-request.interceptors.response.use(
+axiosKoa.interceptors.request.use((config) => config);
+axiosKoa.interceptors.response.use(
   (res) => {
     const { data } = res;
     return data;

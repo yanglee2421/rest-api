@@ -1,1 +1,1 @@
-export { get_bing } from "./get_bing";
+export { bing_get } from "./bing_get";

@@ -1,12 +1,17 @@
-import { ValidationPipe } from '@nestjs/common';
+// NestJs Imports
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { AppModule } from './app.module';
+
+// NodeJs Imports
 import { resolve } from 'node:path';
-import { readFileSync } from 'node:fs';
-import * as gzip from 'express-static-gzip';
+// import { readFileSync } from 'node:fs';
+
+bootstrap();
 
 async function bootstrap() {
+  // Create App
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     /*  httpsOptions: {
        key: readFileSync(toPath('../https/localhost+1-key.pem')),
@@ -14,7 +19,7 @@ async function bootstrap() {
     }, */
   });
 
-  // cors跨域
+  // ** Cors
   app.enableCors({
     origin: [
       'http://127.0.0.1:3000',
@@ -24,7 +29,7 @@ async function bootstrap() {
     ],
   });
 
-  // body校验
+  // Body Validate
   app.useGlobalPipes(
     new ValidationPipe({
       forbidNonWhitelisted: false,
@@ -34,17 +39,13 @@ async function bootstrap() {
     }),
   );
 
-  // 部署静态资源
-  app.useStaticAssets(toPath('../view/vue-app'), {
-    prefix: '/vite-vue/',
-  });
+  // Static Assets
   app.useStaticAssets(toPath('../public'), {
     prefix: '/public',
   });
-  app.use('/vite-react', gzip(toPath('../view/react-app'), {}));
+
   await app.listen(3000);
 }
-bootstrap();
 
 function toPath(path: string) {
   return resolve(__dirname, path);

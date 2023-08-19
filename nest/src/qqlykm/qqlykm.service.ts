@@ -40,10 +40,7 @@ export class QqlykmService {
       }
       throw new Error('上游出错');
     } catch (err) {
-      throw new HttpException(err, 502, {
-        cause: new Error(err.message),
-        description: '上游出错',
-      });
+      throw new HttpException(err, 502);
     }
   }
 }

@@ -38,9 +38,12 @@ app.use("/stripe", routerStripe);
 app.use("/file", middCors(), file);
 
 // ** Static
-const rootPath = process.cwd();
-const publicPath = resolve(rootPath, "./public");
+const publicPath = resolve(process.cwd(), "./public");
 app.use("/public", middGzip(), express.static(publicPath));
+
+app.get("/err", () => {
+  throw new Error("error msg");
+});
 
 // ** Error
 app.use(errorHandler());

@@ -1,13 +1,13 @@
 import cors from "cors";
 
-export function useCors() {
-  const wl = whiteList();
+export function middCors() {
   return cors((req, callback) => {
+    const wl = whiteList();
     const origin = wl.includes(req.headers.origin || "");
     callback(null, { origin });
   });
 }
 
 function whiteList() {
-  return ["http://127.0.0.1", "http://localhost", "http://192.168.1.4"];
+  return ["http://localhost"];
 }

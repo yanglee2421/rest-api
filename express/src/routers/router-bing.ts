@@ -1,31 +1,18 @@
-import axios from "axios";
+// Express Imports
 import { Router } from "express";
 
-interface bingData {
-  images: any[];
-}
+// API Imports
+import { bing_get } from "@/api";
 
-/**
- * 代理必应每日壁纸接口
- */
 export const bing = Router();
 
-bing.get("/bing", async (req, res) => {
-  // ** Query
+bing.get("/", async (req, res) => {
   const { idx = "0", n = "8" } = req.query as Record<string, string>;
+  throw new Error("msg");
 
-  // **
-  const url = new URL("https://cn.bing.com/HPImageArchive.aspx");
-  url.searchParams.set("format", "js");
-  url.searchParams.set("idx", idx);
-  url.searchParams.set("n", n);
-  const bingUrl = "https://cn.bing.com";
-  void bingUrl;
-
-  const rows = await axios.get(url.toString());
-
-  return res.json({
-    isOk: true,
-    rows: rows.data,
+  const data = await bing_get({
+    params: { format: "js", idx: Number(idx), n: Number(n) },
   });
+
+  return res.json(data);
 });

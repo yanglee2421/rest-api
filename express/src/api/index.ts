@@ -1,1 +1,1 @@
-export * from "./get_html";
+export * from "./bing_get";

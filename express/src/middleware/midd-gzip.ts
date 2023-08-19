@@ -6,7 +6,7 @@ import { join } from "node:path";
 import { readFile } from "node:fs/promises";
 import { gzip, InputType } from "node:zlib";
 
-export function useGzip(): RequestHandler {
+export function middGzip(): RequestHandler {
   return async (req, res, next) => {
     try {
       // Only Handle CSS & JS

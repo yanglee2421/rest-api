@@ -1,23 +1,18 @@
 #! pnpm tsx
+
 // NodeJs Imports
-import { createServer } from "node:http";
 import { resolve } from "node:path";
 
 // Express Imports
 import express from "express";
-import history from "connect-history-api-fallback";
 import cors from "cors";
 
 // Middleware Imports
-import { errorHandler } from "@/middleware";
-import { useCors, uselog, useGzip } from "@/hooks";
+import { errorHandler, middLog, middCors, middGzip } from "@/middleware";
 import {
-  redirect,
   bing,
   file,
-  login,
-  pwd,
-  joke,
+  routerStream,
   routerStripe,
   routerCrawler,
 } from "@/routers";
@@ -25,33 +20,27 @@ import {
 // ** App
 const app = express();
 const port = 3002;
-createServer(app).listen(port, () => {
+app.listen(port, () => {
   console.info("standing by", port);
 });
 
 // ** Middleware
-app.use(uselog());
+app.use(middLog());
 app.use(cors());
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 // ** Endpoints
-app.use(bing);
-app.use(redirect);
-app.use(routerCrawler);
-
-app.use("/auth", useCors(), login);
-app.use("/api", useCors(), file);
-app.use("/pwd", useCors(), pwd);
-app.use("/joke", useCors(), joke);
+app.use("/bing", bing);
+app.use("/stream", routerStream);
+app.use("/crawler", routerCrawler);
 app.use("/stripe", routerStripe);
+app.use("/file", middCors(), file);
 
 // ** Static
-app.use(useGzip());
 const rootPath = process.cwd();
-
 const publicPath = resolve(rootPath, "./public");
-app.use("/public", history(), express.static(publicPath));
+app.use("/public", middGzip(), express.static(publicPath));
 
 // ** Error
 app.use(errorHandler());

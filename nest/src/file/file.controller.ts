@@ -30,11 +30,21 @@ export class FileController {
     res.sendFile(filePath);
   }
 
-  @Post()
+  @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
-  async file(@UploadedFile() file: Express.Multer.File) {
+  async upload(@UploadedFile() file: Express.Multer.File) {
     try {
-      return await this.fileService.file(file);
+      return await this.fileService.upload(file);
+    } catch (err: any) {
+      throw new HttpException(err.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
+  @Post('base64')
+  @UseInterceptors(FileInterceptor('img'))
+  async base64(@UploadedFile() file: Express.Multer.File) {
+    try {
+      return await this.fileService.base64(file);
     } catch (err: any) {
       throw new HttpException(err.message, HttpStatus.INTERNAL_SERVER_ERROR);
     }

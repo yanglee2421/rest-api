@@ -2,14 +2,17 @@
 import { Injectable } from '@nestjs/common';
 
 // NodeJs Imports
-import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { appendFile } from 'node:fs/promises';
 
 @Injectable()
 export class FileService {
-  async file(file: Express.Multer.File) {
-    const filePath = resolve(__dirname, '../public/' + file.originalname);
-    await writeFile(filePath, file.buffer);
+  async upload(file: Express.Multer.File) {
+    const filePath = resolve(process.cwd(), './public/' + file.originalname);
+    await appendFile(filePath, file.buffer);
     return { msg: '上传成功！' };
+  }
+  async base64(file: Express.Multer.File) {
+    return file.buffer.toString('base64');
   }
 }

@@ -12,6 +12,7 @@ import { AppController } from './app.controller';
 import { CoffeeModule } from './coffee/coffee.module';
 import { QqlykmModule } from './qqlykm/qqlykm.module';
 import { PasModule } from './pas/pas.module';
+import { BingModule } from './bing/bing.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { PasModule } from './pas/pas.module';
     CoffeeModule,
     QqlykmModule,
     PasModule,
+    BingModule,
   ],
   providers: [AppService],
   controllers: [AppController],

@@ -10,8 +10,6 @@ import { AppController } from './app.controller';
 
 // Modules Imports
 import { CoffeeModule } from './coffee/coffee.module';
-import { QqlykmModule } from './qqlykm/qqlykm.module';
-import { PasModule } from './pas/pas.module';
 import { BingModule } from './bing/bing.module';
 
 @Module({
@@ -24,8 +22,6 @@ import { BingModule } from './bing/bing.module';
       autoLoadEntities: true,
     }),
     CoffeeModule,
-    QqlykmModule,
-    PasModule,
     BingModule,
   ],
   providers: [AppService],

@@ -1,8 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
-import { axiosNest } from './axios-nest';
+import { axiosBing } from './axios-bing';
 
 export function bing_get(req: Req) {
-  return axiosNest<unknown, Res>({
+  return axiosBing<unknown, Res>({
     url: 'https://cn.bing.com/HPImageArchive.aspx',
     ...req,
   });

@@ -1,12 +1,12 @@
 import axios, { AxiosError } from 'axios';
 
-export const axiosNest = axios.create({
+export const axiosBing = axios.create({
   baseURL: '',
   timeout: 1000 * 30,
 });
 
-axiosNest.interceptors.request.use((config) => config);
-axiosNest.interceptors.response.use(
+axiosBing.interceptors.request.use((config) => config);
+axiosBing.interceptors.response.use(
   (res) => {
     const { data } = res;
     return data;

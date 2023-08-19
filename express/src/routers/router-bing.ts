@@ -2,7 +2,7 @@
 import { Router } from "express";
 
 // API Imports
-import { bing_get } from "@/api";
+import { bing_get } from "@/api/bing";
 
 export const bing = Router();
 

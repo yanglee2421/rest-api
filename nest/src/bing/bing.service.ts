@@ -2,7 +2,8 @@
 import { Injectable } from '@nestjs/common';
 
 // API Imports
-import { bing_get } from '@/api';
+import { bing_get } from '@/api/bing';
+import { joke_get } from '@/api/qqlykm';
 
 @Injectable()
 export class BingService {
@@ -14,5 +15,9 @@ export class BingService {
         n,
       },
     });
+  }
+
+  joke() {
+    return joke_get();
   }
 }

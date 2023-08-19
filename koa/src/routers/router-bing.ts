@@ -2,7 +2,7 @@
 import Router from "@koa/router";
 
 // API Imports
-import { bing_get } from "@/api";
+import { bing_get } from "@/api/bing";
 
 // ** Router
 export const bing = new Router({ prefix: "/bing" });

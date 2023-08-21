@@ -1,8 +1,0 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-body {
-  border: 1px red solid;
-}

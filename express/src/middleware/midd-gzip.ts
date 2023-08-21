@@ -12,12 +12,11 @@ export function middGzip(): RequestHandler {
       // Only Handle CSS & JS
       const isCss = req.url.endsWith(".css");
       const isJs = req.url.endsWith(".js");
-      console.log(isCss, isJs);
 
       if (!isCss && !isJs) return next();
 
       // Not Allow Gzip
-      const filePath = join(process.cwd(), req.url);
+      const filePath = join(process.cwd(), req.originalUrl);
       const isAcceptGzip = req.headers["accept-encoding"]?.includes("gzip");
       if (!isAcceptGzip) return res.sendFile(filePath);
 

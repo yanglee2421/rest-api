@@ -1,8 +1,7 @@
 # compiled output
 /dist
 /node_modules
-# /public
-/view
+
 # Logs
 logs
 *.log

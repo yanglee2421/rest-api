@@ -8,6 +8,8 @@ import axios from "axios";
 export const hello = new Router();
 
 // ** Endpoints
+
+// Entry
 hello.get("/", async (ctx, next) => {
   await next();
   ctx.body = ctx.query;
@@ -15,17 +17,8 @@ hello.get("/", async (ctx, next) => {
   // NOTE: ctx.req is NOT a alias for ctx.request
   // console.log(ctx.req);
   console.log(ctx.request.query);
-  // const { data } = await axios({
-  //   baseURL: `https://${ctx.query.handle}.myshopline.com`,
-  //   url: "/admin/oauth-web/#/oauth/authorize",
-  //   params: {
-  //     appKey: "9a666537abf26ec0937b7239517c934c8a7d3101",
-  //     responseType: "code",
-  //     scope: "read_products,write_products",
-  //     redirectUri: "http://localhost:5173",
-  //   },
-  // });
-  // console.log("data", data);
+
+  const {} = ctx.query;
 
   const url = new URL(
     "/admin/oauth-web/#/oauth/authorize",
@@ -44,6 +37,31 @@ hello.get("/", async (ctx, next) => {
 
   ctx.redirect(redirectURL);
 });
+
+hello.get("/callback", async (ctx, next) => {
+  await next();
+  const { handle, code, appkey, timestamp, sign } = ctx.query;
+
+  // Get Token
+  const tokenData = await axios({
+    baseURL: `https://${handle}.myshopline.com`,
+    url: "/admin/oauth/token/create",
+    method: "POST",
+    data: {
+      sign: toHanldeSign(sign),
+      code,
+    },
+    headers: {
+      appkey,
+      timestamp: Date.now(),
+    },
+  });
+});
+
+function toHanldeSign(sign: unknown) {
+  return sign;
+}
+
 hello.get("/:id", async (ctx, next) => {
   await next();
   ctx.body = ctx.params;

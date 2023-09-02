@@ -33,7 +33,7 @@ app.use(upload.routes());
 app.use(hello.routes());
 
 // Bootstarp
-const port = 3001;
+const port = 5173;
 app.listen(port, () => {
   console.log(`stand by ${port}`);
 });

@@ -22,6 +22,7 @@ app.use(bodyParser());
 app.use(
   cors({
     origin(ctx) {
+      return "https://k7npd2jic.myshopline.com";
       return ctx.origin;
     },
   })

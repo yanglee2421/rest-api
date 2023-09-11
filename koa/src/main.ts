@@ -6,7 +6,7 @@ import cors from "@koa/cors";
 import bodyParser from "koa-bodyparser";
 
 // Router Imports
-import { bing, hello, upload } from "@/routers";
+import { bing, hello, upload, chat } from "@/routers";
 
 // Middleware Imports
 import { errorHandler, log } from "@/middleware";
@@ -22,8 +22,8 @@ app.use(bodyParser());
 app.use(
   cors({
     origin(ctx) {
-      return "https://k7npd2jic.myshopline.com";
-      return ctx.origin;
+      const isLocal = ctx.origin.includes("localhost");
+      return isLocal ? ctx.origin : "https://k7npd2jic.myshopline.com";
     },
   })
 );
@@ -32,6 +32,7 @@ app.use(
 app.use(bing.routes());
 app.use(upload.routes());
 app.use(hello.routes());
+app.use(chat.routes());
 
 // Bootstarp
 const port = 5173;

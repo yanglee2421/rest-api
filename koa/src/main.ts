@@ -35,7 +35,7 @@ app.use(hello.routes());
 app.use(chat.routes());
 
 // Bootstarp
-const port = 5173;
+const port = 3002;
 app.listen(port, () => {
   console.log(`stand by ${port}`);
 });

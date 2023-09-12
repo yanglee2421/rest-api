@@ -19,7 +19,7 @@ import {
 
 // ** App
 const app = express();
-const port = 3002;
+const port = 3001;
 app.listen(port, () => {
   console.info("standing by", port);
 });

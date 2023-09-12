@@ -47,7 +47,7 @@ async function bootstrap() {
     prefix: '/public',
   });
 
-  await app.listen(3000);
+  await app.listen(3003);
 }
 
 function toPath(path: string) {

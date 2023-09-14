@@ -10,12 +10,11 @@ import { AppController } from './app.controller';
 import { CoffeeModule } from './coffee/coffee.module';
 import { BingModule } from './bing/bing.module';
 import { TableModule } from './table/table.module';
+import { FileModule } from './file/file.module';
+import { EventsModule } from './events/events.module';
 
 // NodeJs Imports
 import { resolve } from 'node:path';
-import { FileModule } from './file/file.module';
-import { EventsGateway } from './events/events.gateway';
-import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
@@ -32,7 +31,7 @@ import { EventsModule } from './events/events.module';
     FileModule,
     EventsModule,
   ],
-  providers: [AppService, EventsGateway],
+  providers: [AppService],
   controllers: [AppController],
 })
 export class AppModule {}

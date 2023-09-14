@@ -141,6 +141,9 @@ importers:
       rxjs:
         specifier: ^7.8.1
         version: 7.8.1
+      socket.io:
+        specifier: ^4.7.2
+        version: 4.7.2
       sqlite3:
         specifier: ^5.1.6
         version: 5.1.6

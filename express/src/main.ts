@@ -2,6 +2,7 @@
 
 // NodeJs Imports
 import { resolve } from "node:path";
+import { createServer } from "node:http";
 
 // Express Imports
 import express from "express";
@@ -17,11 +18,26 @@ import {
   routerCrawler,
 } from "@/routers";
 
+// WebSockets Imports
+import { Server } from "socket.io";
+
 // ** App
 const app = express();
 const port = 3001;
-app.listen(port, () => {
-  console.info("standing by", port);
+const server = createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin(requestOrigin, callback) {
+      void requestOrigin;
+      callback(null, true);
+    },
+  },
+});
+
+io.on("connection", (socket) => {
+  socket.on("msg", (arg) => {
+    console.log(arg); // world
+  });
 });
 
 // ** Middleware
@@ -47,3 +63,7 @@ app.get("/err", () => {
 
 // ** Error
 app.use(errorHandler());
+
+server.listen(port, () => {
+  console.info("standing by", port);
+});

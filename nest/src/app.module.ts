@@ -14,6 +14,8 @@ import { TableModule } from './table/table.module';
 // NodeJs Imports
 import { resolve } from 'node:path';
 import { FileModule } from './file/file.module';
+import { EventsGateway } from './events/events.gateway';
+import { EventsModule } from './events/events.module';
 
 @Module({
   imports: [
@@ -28,8 +30,9 @@ import { FileModule } from './file/file.module';
     BingModule,
     TableModule,
     FileModule,
+    EventsModule,
   ],
-  providers: [AppService],
+  providers: [AppService, EventsGateway],
   controllers: [AppController],
 })
 export class AppModule {}

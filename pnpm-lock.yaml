@@ -25,6 +25,9 @@ importers:
       nodemon:
         specifier: ^3.0.1
         version: 3.0.1
+      socket.io:
+        specifier: ^4.7.2
+        version: 4.7.2
       stripe:
         specifier: ^12.17.0
         version: 12.18.0

@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Live Server</title>
+
+    <link
+      rel="stylesheet"
+      href="https://erp-stg.warpdriven.ai/im_livechat/external_lib.css"
+    />
+
+    <script
+      type="text/javascript"
+      src="https://erp-stg.warpdriven.ai/im_livechat/external_lib.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://erp-stg.warpdriven.ai/im_livechat/loader/1"
+    ></script>
+  </head>
+  <body>
+    <main id="main">main</main>
+    <script>
+      globalThis.addEventListener("message", (evt) => {
+        console.log(evt);
+        const el = document.getElementById("main");
+        el.innerText += `\n${new Date().toLocaleString()}`;
+      });
+    </script>
+  </body>
+</html>

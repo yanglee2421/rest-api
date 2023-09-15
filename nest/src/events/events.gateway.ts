@@ -10,6 +10,9 @@ import {
 // WebSocket Imports
 import { Server, Socket } from 'socket.io';
 
+// NodeJs Imports
+import { randomUUID } from 'node:crypto';
+
 @WebSocketGateway({
   cors: {
     origin(requestOrigin, callback) {
@@ -26,7 +29,11 @@ export class EventsGateway {
     @ConnectedSocket() socket: Socket,
     @MessageBody() payload: string,
   ): string {
-    console.log(socket, payload);
+    console.log(payload);
+
+    setTimeout(() => {
+      socket.emit('msg', randomUUID());
+    }, 1000 * 5);
     return 'Hello world!';
   }
 }

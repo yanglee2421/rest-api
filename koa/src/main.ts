@@ -44,7 +44,14 @@ app.use(chat.routes());
 // Bootstarp
 const port = 3002;
 const server = createServer(app.callback());
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin(requestOrigin, callback) {
+      void requestOrigin;
+      callback(null, true);
+    },
+  },
+});
 
 io.on("connection", (socket) => {
   socket.on("msg", (evt) => {

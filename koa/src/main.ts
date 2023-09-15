@@ -11,6 +11,13 @@ import { bing, hello, upload, chat } from "@/routers";
 // Middleware Imports
 import { errorHandler, log } from "@/middleware";
 
+// NodeJs Imports
+import { createServer } from "node:http";
+import { randomUUID } from "node:crypto";
+
+// WebSocket Imports
+import { Server } from "socket.io";
+
 const app = new Koa();
 
 // Error Handler
@@ -36,6 +43,19 @@ app.use(chat.routes());
 
 // Bootstarp
 const port = 3002;
-app.listen(port, () => {
+const server = createServer(app.callback());
+const io = new Server(server);
+
+io.on("connection", (socket) => {
+  socket.on("msg", (evt) => {
+    console.log(evt);
+
+    setTimeout(() => {
+      socket.emit("msg", randomUUID());
+    }, 1000 * 5);
+  });
+});
+
+server.listen(port, () => {
   console.log(`stand by ${port}`);
 });

@@ -71,6 +71,9 @@ importers:
       koa-bodyparser:
         specifier: ^4.4.1
         version: 4.4.1
+      socket.io:
+        specifier: ^4.7.2
+        version: 4.7.2
     devDependencies:
       '@types/formidable':
         specifier: ^2.0.6

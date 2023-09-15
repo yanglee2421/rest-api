@@ -25,6 +25,7 @@
     "axios": "^1.4.0",
     "formidable": "^3.5.0",
     "koa": "^2.14.2",
-    "koa-bodyparser": "^4.4.1"
+    "koa-bodyparser": "^4.4.1",
+    "socket.io": "^4.7.2"
   }
 }

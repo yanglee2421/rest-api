@@ -59,7 +59,7 @@ io.on("connection", (socket) => {
 
     setTimeout(() => {
       socket.emit("msg", randomUUID());
-    }, 1000 * 5);
+    }, 1000 * 2);
   });
 });
 

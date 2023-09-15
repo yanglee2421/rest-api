@@ -3,12 +3,11 @@
 // NodeJs Imports
 import { resolve } from "node:path";
 import { createServer } from "node:http";
+import { randomUUID } from "node:crypto";
 
 // Express Imports
 import express from "express";
 import cors from "cors";
-
-// Middleware Imports
 import { errorHandler, middLog, middCors, middGzip } from "@/middleware";
 import {
   bing,
@@ -19,24 +18,27 @@ import {
 } from "@/routers";
 
 // WebSockets Imports
-import { Server } from "socket.io";
+import { WebSocketServer } from "ws";
 
 // ** App
 const app = express();
 const port = 3001;
 const server = createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin(requestOrigin, callback) {
-      void requestOrigin;
-      callback(null, true);
-    },
-  },
-});
+const wss = new WebSocketServer({ server });
 
-io.on("connection", (socket) => {
-  socket.on("msg", (arg) => {
-    console.log(arg); // world
+// ** WebSocket
+wss.on("connection", (ws) => {
+  ws.on("message", (data) => {
+    void data;
+
+    // Decoded text
+    const text = data.toString("utf-8");
+    console.log(new Date().toLocaleString(), text);
+
+    if (text === "check") return;
+    setTimeout(() => {
+      ws.send(new Date().toLocaleString() + " " + randomUUID());
+    }, 1000 * 2);
   });
 });
 

@@ -1,21 +1,21 @@
 import("./dist/assets/wp-vite-main.js");
 
 void (() => {
-  const scriptTag1 = document.createElement("script");
-  scriptTag1.type = "module";
-  scriptTag1.innerText = `
+  const reactRefreshTag = document.createElement("script");
+  reactRefreshTag.type = "module";
+  reactRefreshTag.innerText = `
   import RefreshRuntime from "http://localhost:8080/@react-refresh";
   RefreshRuntime.injectIntoGlobalHook(window);
   window.$RefreshReg$ = () => {};
   window.$RefreshSig$ = () => (type) => type;
   window.__vite_plugin_react_preamble_installed__ = true;
   `;
-  const scriptTag2 = document.createElement("script");
-  scriptTag2.type = "module";
-  scriptTag2.src = "http://localhost:8080/@vite/client";
-  const scriptTag3 = document.createElement("script");
-  scriptTag3.type = "module";
-  scriptTag3.src = "http://localhost:8080/src/main.tsx";
+  const viteTag = document.createElement("script");
+  viteTag.type = "module";
+  viteTag.src = "http://localhost:8080/@vite/client";
+  const mainTag = document.createElement("script");
+  mainTag.type = "module";
+  mainTag.src = "http://localhost:8080/src/main.tsx";
 
-  document.body.append(scriptTag1, scriptTag2, scriptTag3);
+  document.body.append(reactRefreshTag, viteTag, mainTag);
 })();

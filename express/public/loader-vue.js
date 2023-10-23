@@ -3,7 +3,7 @@ import("./dist/assets/wp-vite-main.js");
 void (() => {
   const reactRefreshTag = document.createElement("script");
   reactRefreshTag.type = "module";
-  reactRefreshTag.innerText = `
+  reactRefreshTag.innerHTML = `
   import RefreshRuntime from "http://localhost:8080/@react-refresh";
   RefreshRuntime.injectIntoGlobalHook(window);
   window.$RefreshReg$ = () => {};

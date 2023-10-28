@@ -15,6 +15,7 @@ import {
   routerStream,
   routerStripe,
   routerCrawler,
+  routerHello,
 } from "@/routers";
 
 // WebSockets Imports
@@ -54,6 +55,7 @@ app.use("/stream", routerStream);
 app.use("/crawler", routerCrawler);
 app.use("/stripe", routerStripe);
 app.use("/file", middCors(), file);
+app.use("/hello", middCors(), routerHello);
 
 // ** Static
 const publicPath = resolve(process.cwd(), "./public");

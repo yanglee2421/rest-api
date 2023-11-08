@@ -4,30 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Live Server</title>
-
-    <link
-      rel="stylesheet"
-      href="https://erp-stg.warpdriven.ai/im_livechat/external_lib.css"
-    />
-
-    <script
-      type="text/javascript"
-      src="https://erp-stg.warpdriven.ai/im_livechat/external_lib.js"
-    ></script>
-
-    <script
-      type="text/javascript"
-      src="https://erp-stg.warpdriven.ai/im_livechat/loader/1"
-    ></script>
   </head>
   <body>
-    <main id="main">hello world</main>
+    <main id="root"></main>
+
+    <script type="module">
+      (() => {
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = "http://localhost:5500/assets/index-bf95b46d.css";
+        const script = document.createElement("script");
+        script.type = "module";
+        script.src = "http://localhost:5500/assets/index-aa49236d.js";
+        document.head.append(link, script);
+      })();
+    </script>
+
+    <!-- GTranslate -->
     <div class="gtranslate_wrapper"></div>
     <script>
       window.gtranslateSettings = {
         default_language: "en",
         detect_browser_language: true,
-        languages: ["en", "fr", "de", "it", "es"],
+        languages: ["en", "zh-CN", "zh-TW", "fr", "de", "it", "es"],
         wrapper_selector: ".gtranslate_wrapper",
       };
     </script>

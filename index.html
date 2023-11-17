@@ -7,8 +7,21 @@
   </head>
   <body>
     <main id="root"></main>
+    <script>
+      (() => {
+        const allowOrigins = new Set();
+        allowOrigins.add("http://localhost:3006");
 
-    <script type="module">
+        window.addEventListener("message", (evt) => {
+          if (allowOrigins.has(evt.origin)) {
+            console.log(evt);
+            localStorage.setItem("apikey", JSON.stringify(evt.data));
+          }
+        });
+      })();
+    </script>
+
+    <!-- <script type="module">
       (() => {
         const link = document.createElement("link");
         link.rel = "stylesheet";
@@ -18,7 +31,7 @@
         script.src = "http://localhost:5500/assets/index-aa49236d.js";
         document.head.append(link, script);
       })();
-    </script>
+    </script> -->
 
     <!-- GTranslate -->
     <div class="gtranslate_wrapper"></div>

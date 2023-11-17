@@ -10,14 +10,52 @@
     <script>
       (() => {
         const allowOrigins = new Set();
+        allowOrigins.add("http://localhost:3004");
         allowOrigins.add("http://localhost:3006");
+        allowOrigins.add("http://localhost:3007");
 
         window.addEventListener("message", (evt) => {
-          if (allowOrigins.has(evt.origin)) {
-            console.log(evt);
-            localStorage.setItem("apikey", JSON.stringify(evt.data));
+          console.log(evt);
+
+          const data = toJsonParse(evt.data);
+          const isWithoutFalsy = [allowOrigins.has(evt.origin), data].every(
+            Boolean
+          );
+
+          if (!isWithoutFalsy) return;
+
+          switch (data.type) {
+            case "sign in":
+              localStorage.setItem("token", data.token);
+              break;
+            case "sign out":
+              localStorage.removeItem("token");
+              break;
+            case "whoami":
+              const token = localStorage.getItem("token");
+              evt.source.postMessage(
+                JSON.stringify({
+                  type: "whoami",
+                  token,
+                }),
+                evt.origin,
+                []
+              );
+              break;
+            default:
           }
+
+          localStorage.setItem("apikey", JSON.stringify(evt.data));
         });
+
+        function toJsonParse(params) {
+          try {
+            return JSON.parse(params);
+          } catch (error) {
+            console.error(error);
+            return null;
+          }
+        }
       })();
     </script>
 

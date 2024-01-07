@@ -11,5 +11,5 @@ hello.get("/product/products.json", async (ctx, next) => {
 
 hello.post("/hello", async (ctx, next) => {
   await next();
-  ctx.body = { msg: "hello world!" };
+  ctx.body = ctx.query;
 });

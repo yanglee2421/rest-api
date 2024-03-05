@@ -1,5 +1,3 @@
-// import("./dist/assets/wp-vite-main.js");
-
 void ((port = 5173) => {
   const reactRefreshTag = document.createElement("script");
   reactRefreshTag.type = "module";
@@ -18,4 +16,4 @@ void ((port = 5173) => {
   mainTag.src = `http://localhost:${port}/src/main.tsx`;
 
   document.body.append(reactRefreshTag, viteTag, mainTag);
-})(port);
+})();

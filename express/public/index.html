@@ -1,48 +1,31 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link
-      rel="stylesheet"
-      href="http://localhost:3002/public/dist/assets/index.css"
-    />
   </head>
   <body>
-    <main id="MainContent">
-      <h1>Else Content</h1>
-      <section
-        id="shopify-section-template--17605255627068__product-recommendations"
-        class="shopify-section section"
-      >
-        Prev Recommond
-      </section>
-    </main>
+    <div id="root"></div>
   </body>
 
-  <!-- Development -->
   <script type="module">
-    import RefreshRuntime from "http://localhost:5173/@react-refresh";
-    RefreshRuntime.injectIntoGlobalHook(window);
-    window.$RefreshReg$ = () => {};
-    window.$RefreshSig$ = () => (type) => type;
-    window.__vite_plugin_react_preamble_installed__ = true;
+    import.meta.url = "xxx";
+    import.meta.resolve = Boolean;
+    console.log(import.meta, import.meta.resolve("./index.txt"));
   </script>
-  <script type="module" src="http://localhost:5173/@vite/client"></script>
-  <script type="module" src="http://localhost:5173/src/main.tsx"></script>
+  <script type="module">
+    const url = new URL("./index.txt", import.meta.url);
 
-  <!-- Recommened -->
-  <!-- <script
-    type="module"
-    src="http://localhost:3002/public/dist/assets/wp-vite-main.js"
-  ></script> -->
+    url.username = "username";
+    url.password = "password";
 
-  <!-- Support CORS -->
-  <!-- <script>
-    import("http://localhost:3002/public/loader-vue.js");
-  </script> -->
+    url.searchParams.set("search_field", "search_value");
+    url.hash = "hash";
 
-  <!-- Does not support CORS -->
-  <!-- <script src="http://localhost:3002/public/loader-vue.js"></script> -->
+    console.log(import.meta, url);
+  </script>
+
+  <!-- Development -->
+  <script src="./vite-react-dev.js"></script>
 </html>

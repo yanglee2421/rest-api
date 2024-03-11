@@ -1,33 +1,33 @@
 {
   "compilerOptions": {
-    // Private
+    "types": ["node"],
     "baseUrl": ".",
     "paths": {
       "@express/*": ["express/src/*"],
-      "@koa/*": ["koa/src/*"]
+      "@koa/*": ["koa/src/*"],
+      "@api/*": ["api/*"]
     },
 
     // Build
     "target": "ESNext",
+    "useDefineForClassFields": true,
     "module": "ESNext",
     "lib": ["ESNext"],
     "skipLibCheck": true,
 
-    // Linting
-    "strict": true,
-    "strictPropertyInitialization": false,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-
-    // TypeORM
-    "moduleResolution": "node",
+    // Bundler
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "esModuleInterop": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "noEmit": true,
+    "jsx": "preserve",
+
+    // Linting
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
   },
-  "include": ["express", "koa"],
-  "exclude": ["nest"]
+  "include": ["express", "koa", "api"]
 }

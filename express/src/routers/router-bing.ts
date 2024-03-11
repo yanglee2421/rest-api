@@ -1,8 +1,5 @@
-// Express Imports
 import { Router } from "express";
-
-// API Imports
-import { bing_get } from "@/api/bing";
+import { bing_get } from "@api/bing/bing_get";
 
 export const bing = Router();
 

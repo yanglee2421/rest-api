@@ -1,13 +1,8 @@
-// Router Imports
 import Router from "@koa/router";
+import { bing_get } from "@api/bing/bing_get";
 
-// API Imports
-import { bing_get } from "@/api/bing";
-
-// ** Router
 export const bing = new Router({ prefix: "/bing" });
 
-// ** Endpoints
 bing.get("/", async (ctx, next) => {
   await next();
 

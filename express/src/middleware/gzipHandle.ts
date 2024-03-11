@@ -1,13 +1,10 @@
-// Express Imports
-
-// NodeJs Imports
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { gzip } from "node:zlib";
 import type { RequestHandler } from "express";
 import type { InputType } from "node:zlib";
 
-export function middGzip(): RequestHandler {
+export function gzipHandle(): RequestHandler {
   return async (req, res, next) => {
     try {
       // Only Handle CSS & JS
@@ -35,6 +32,6 @@ export function middGzip(): RequestHandler {
 
 function toGzip(buffer: InputType) {
   return new Promise<Buffer>((res, rej) =>
-    gzip(buffer, (err, compressed) => (err ? rej(err) : res(compressed)))
+    gzip(buffer, (err, compressed) => (err ? rej(err) : res(compressed))),
   );
 }

@@ -1,8 +1,5 @@
-// Koa Imports
 import Router from "@koa/router";
-
-// Utils Imports
-import { timeout } from "@/utils";
+import { timeout } from "@utils/timeout";
 
 export const chat = new Router({ prefix: "/chat" });
 

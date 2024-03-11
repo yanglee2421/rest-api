@@ -1,4 +1,5 @@
-import path from "node:path";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { Router } from "express";
 
 export const file = Router();
@@ -34,5 +35,6 @@ file.get("/image/:way", (req, res) => {
 });
 
 function toPublicFile(fileName: string) {
-  return path.resolve(__dirname, `../../public/${fileName}`);
+  const __dirname = dirname(fileURLToPath(import.meta.url));
+  return resolve(__dirname, `../../public/${fileName}`);
 }

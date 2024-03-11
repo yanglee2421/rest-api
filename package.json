@@ -2,23 +2,31 @@
   "name": "rest-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
+    "express": "nodemon -e ts --exec tsx express/src/main",
+    "koa": "nodemon -e ts --exec tsx koa/src/main",
     "lint:fix": "eslint . --fix --ext ts && prettier ./**/*.ts --write"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/formidable": "^3.4.5",
     "@types/node": "^20.11.25",
     "@typescript-eslint/eslint-plugin": "^7.1.1",
     "@typescript-eslint/parser": "^7.1.1",
-    "axios": "^1.6.7",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
+    "nodemon": "^3.1.0",
     "prettier": "^3.2.5",
+    "tsx": "^4.7.1",
     "typescript": "^5.4.2"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "formidable": "^3.5.1"
   }
 }

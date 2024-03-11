@@ -1,17 +1,10 @@
-// Router Imports
-
-// NodeJs Imports
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import Router from "@koa/router";
+import { toParseForm } from "@utils/toParseForm";
 
-// Utils Imports
-import { toParseForm } from "@/utils";
-
-// ** Router
 export const upload = new Router({ prefix: "/upload" });
 
-// ** Endpoints
 upload.post("/base64", async (ctx, next) => {
   await next();
 

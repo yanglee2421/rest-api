@@ -1,13 +1,8 @@
-// NodeJs Imports
 import formidable from "formidable";
 import type { Fields, Files, Options } from "formidable";
 import type { IncomingMessage } from "node:http";
 
-// Formidable Imports
-
-// Parse Form
 export function toParseForm(req: IncomingMessage, opts?: Options) {
-  // ** Form
   const form = formidable(opts);
 
   return new Promise<Data>((res, rej) => {
@@ -17,6 +12,7 @@ export function toParseForm(req: IncomingMessage, opts?: Options) {
     });
   });
 }
+
 interface Data {
   fields: Fields;
   files: Files;

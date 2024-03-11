@@ -1,8 +1,8 @@
-import axios from 'axios';
-import type { AxiosError } from 'axios';
+import axios from "axios";
+import type { AxiosError } from "axios";
 
 export const axiosBing = axios.create({
-  baseURL: '',
+  baseURL: "https://cn.bing.com",
   timeout: 1000 * 30,
 });
 
@@ -13,7 +13,6 @@ axiosBing.interceptors.response.use(
     return data;
   },
   (err: AxiosError) => {
-    const { message } = err;
-    throw new Error(message);
+    throw new Error(err.message);
   },
 );

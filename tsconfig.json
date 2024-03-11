@@ -5,7 +5,8 @@
     "paths": {
       "@express/*": ["express/src/*"],
       "@koa/*": ["koa/src/*"],
-      "@api/*": ["api/*"]
+      "@api/*": ["api/*"],
+      "@utils/*": ["utils/*"]
     },
 
     // Build

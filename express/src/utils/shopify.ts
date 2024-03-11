@@ -1,7 +1,6 @@
 import "@shopify/shopify-api/adapters/node";
 import { shopifyApi, LATEST_API_VERSION } from "@shopify/shopify-api";
 import { SQLiteSessionStorage } from "@shopify/shopify-app-session-storage-sqlite";
-
 import { URL, fileURLToPath } from "node:url";
 
 export const shopify = shopifyApi({

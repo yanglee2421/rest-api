@@ -1,5 +1,5 @@
 // Koa Imports
-import { Middleware } from "koa";
+import type { Middleware } from "koa";
 
 export function errorHandler(): Middleware {
   return async (ctx, next) => {

@@ -1,8 +1,9 @@
 // NodeJs Imports
-import { IncomingMessage } from "node:http";
+import formidable from "formidable";
+import type { Fields, Files, Options } from "formidable";
+import type { IncomingMessage } from "node:http";
 
 // Formidable Imports
-import formidable, { Fields, Files, Options } from "formidable";
 
 // Parse Form
 export function toParseForm(req: IncomingMessage, opts?: Options) {

@@ -1,13 +1,14 @@
 #! pnpm tsx
 
 // NodeJs Imports
-import { resolve } from "node:path";
-import { createServer } from "node:http";
 import { randomUUID } from "node:crypto";
+import { createServer } from "node:http";
+import { resolve } from "node:path";
 
 // Express Imports
-import express from "express";
 import cors from "cors";
+import express from "express";
+import { WebSocketServer } from "ws";
 import { errorHandler, middLog, middCors, middGzip } from "@/middleware";
 import {
   bing,
@@ -19,7 +20,6 @@ import {
 } from "@/routers";
 
 // WebSockets Imports
-import { WebSocketServer } from "ws";
 
 // ** App
 const app = express();

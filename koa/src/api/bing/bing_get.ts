@@ -1,5 +1,5 @@
-import { AxiosRequestConfig } from 'axios';
 import { axiosBing } from './axios-bing';
+import type { AxiosRequestConfig } from 'axios';
 
 export function bing_get(req: Req) {
   return axiosBing<unknown, Res>({

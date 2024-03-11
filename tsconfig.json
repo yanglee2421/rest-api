@@ -1,9 +1,11 @@
 {
-  "include": ["src"],
   "compilerOptions": {
     // Private
     "baseUrl": ".",
-    "paths": { "@/*": ["src/*"] },
+    "paths": {
+      "@express/*": ["express/src/*"],
+      "@koa/*": ["koa/src/*"]
+    },
 
     // Build
     "target": "ESNext",
@@ -25,5 +27,7 @@
     "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
-  }
+  },
+  "include": ["express", "koa"],
+  "exclude": ["nest"]
 }

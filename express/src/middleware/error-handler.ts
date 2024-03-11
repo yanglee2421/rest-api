@@ -1,9 +1,9 @@
 // Express Imports
-import { ErrorRequestHandler } from "express";
 
 // NodeJs Imports
 import { appendFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import type { ErrorRequestHandler } from "express";
 
 export function errorHandler(): ErrorRequestHandler {
   return async (err, req, res, next) => {

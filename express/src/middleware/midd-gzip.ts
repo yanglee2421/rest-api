@@ -1,10 +1,11 @@
 // Express Imports
-import { RequestHandler } from "express";
 
 // NodeJs Imports
-import { join } from "node:path";
 import { readFile } from "node:fs/promises";
-import { gzip, InputType } from "node:zlib";
+import { join } from "node:path";
+import { gzip } from "node:zlib";
+import type { RequestHandler } from "express";
+import type { InputType } from "node:zlib";
 
 export function middGzip(): RequestHandler {
   return async (req, res, next) => {

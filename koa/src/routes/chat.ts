@@ -3,7 +3,7 @@ import { timeout } from "@utils/timeout";
 
 export const chat = new Router({ prefix: "/chat" });
 
-chat.get("/bing", async (ctx, next) => {
+chat.get("/stream", async (ctx, next) => {
   await next();
 
   ctx.set("Content-type", "application/octet-stream");

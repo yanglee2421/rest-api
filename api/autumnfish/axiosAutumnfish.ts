@@ -2,7 +2,7 @@ import axios from "axios";
 import type { AxiosError } from "axios";
 
 export const axiosAutumnfish = axios.create({
-  url: "https://autumnfish.cn",
+  baseURL: "https://autumnfish.cn",
   timeout: 1000 * 30,
 });
 

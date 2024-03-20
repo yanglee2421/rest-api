@@ -5,6 +5,7 @@ import bodyParser from "koa-bodyparser";
 import { errorHandler } from "@koa/middleware/errorHandler";
 import { log } from "@koa/middleware/log";
 import { chat } from "@koa/routes/chat";
+import { stream } from "@koa/routes/stream";
 import { upload } from "@koa/routes/upload";
 
 const app = new Koa();
@@ -25,6 +26,7 @@ app.use(bodyParser());
 
 app.use(chat.routes());
 app.use(upload.routes());
+app.use(stream.routes());
 
 const port = 3002;
 createServer(app.callback()).listen(port, () => {

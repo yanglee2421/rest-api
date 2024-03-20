@@ -2,6 +2,7 @@ import { createServer } from "node:http";
 import cors from "@koa/cors";
 import Koa from "koa";
 import bodyParser from "koa-bodyparser";
+import * as kolorist from "kolorist";
 import { errorHandler } from "@koa/middleware/errorHandler";
 import { log } from "@koa/middleware/log";
 import { chat } from "@koa/routes/chat";
@@ -13,16 +14,14 @@ const app = new Koa();
 app.use(errorHandler());
 
 app.use(log());
+app.use(bodyParser());
 app.use(
   cors({
     origin(ctx) {
-      return ctx.origin.includes("localhost")
-        ? ctx.origin
-        : "https://k7npd2jic.myshopline.com";
+      return ctx.origin.includes("localhost") ? ctx.origin : "*";
     },
   }),
 );
-app.use(bodyParser());
 
 app.use(chat.routes());
 app.use(upload.routes());
@@ -30,5 +29,5 @@ app.use(stream.routes());
 
 const port = 3002;
 createServer(app.callback()).listen(port, () => {
-  console.log(`stand by ${port}`);
+  console.log("stand by " + kolorist.blue("http://localhost:" + port));
 });

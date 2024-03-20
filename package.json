@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "axios": "^1.6.7",
-    "formidable": "^3.5.1"
+    "formidable": "^3.5.1",
+    "kolorist": "^1.8.0"
   }
 }

@@ -1,24 +1,35 @@
 import { PassThrough } from "node:stream";
 import Router from "@koa/router";
-import { timeout } from "@utils/timeout";
 
 export const stream = new Router({ prefix: "/stream" });
 
 stream.get("/", async (ctx, next) => {
   await next();
 
-  //   ctx.set("Content-type", "application/octet-stream");
-  ctx.set("Content-type", "application/octet-stream");
+  ctx.set({
+    "Content-type": "text/event-stream",
+    "Cache-Control": "no-cache",
+    Connection: "keep-alive",
+  });
 
   const stream = new PassThrough();
 
   ctx.body = stream;
 
-  for (const i of text) {
-    await timeout(100);
-    stream.push(i);
-  }
-  stream.push(null);
+  ctx.req.on("close", () => {
+    clearInterval(interval);
+    stream.end();
+  });
+
+  let index = 0;
+  const interval = setInterval(() => {
+    if (index < text.length) {
+      stream.write(`event: message\ndata: ${text[index++]}\n\n`);
+    } else {
+      clearInterval(interval);
+      stream.end("event: done\ndata: \n\n");
+    }
+  }, 100);
 });
 
 const text =

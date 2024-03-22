@@ -74,15 +74,11 @@ router.get("/user/:id", async (ctx, next) => {
 
   const params = oneSchema.parse(ctx.params);
 
-  const data = await prisma.user.findUnique({
+  const data = await prisma.user.findUniqueOrThrow({
     where: {
       id: params.id,
     },
   });
-
-  if (!data) {
-    throw new Error("Not found");
-  }
 
   ctx.body = data;
 });
@@ -99,4 +95,16 @@ const oneSchema = z.object({
         message: "excepted a int",
       },
     ),
+});
+
+router.get("/post/many", async (ctx, next) => {
+  await next();
+
+  const data = await prisma.post.findMany({
+    where: {
+      authorId: 1,
+    },
+  });
+
+  ctx.body = data;
 });

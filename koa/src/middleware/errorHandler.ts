@@ -17,7 +17,7 @@ export function errorHandler(): Middleware {
 
       if (err instanceof Error) {
         ctx.status = 500;
-        ctx.body = { message: err.message };
+        ctx.body = err;
 
         return;
       }

@@ -8,6 +8,7 @@ import { log } from "@koa/middleware/log";
 import { chat } from "@koa/routes/chat";
 import { stream } from "@koa/routes/stream";
 import { upload } from "@koa/routes/upload";
+import { router as prismaRouter } from "@koa/routes/prisma";
 
 const app = new Koa();
 
@@ -26,6 +27,7 @@ app.use(
 app.use(chat.routes());
 app.use(upload.routes());
 app.use(stream.routes());
+app.use(prismaRouter.routes());
 
 const port = 3002;
 createServer(app.callback()).listen(port, () => {

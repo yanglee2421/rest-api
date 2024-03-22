@@ -5,7 +5,7 @@ import { z } from "zod";
 export const router = new Router({ prefix: "/prisma" });
 const prisma = new PrismaClient();
 
-router.post("/create", async (ctx, next) => {
+router.post("/user/create", async (ctx, next) => {
   await next();
 
   const user = schema.parse(ctx.request.body);
@@ -17,12 +17,86 @@ router.post("/create", async (ctx, next) => {
     },
   });
 
-  if (data) {
-    ctx.body = data;
-  }
+  ctx.body = data;
 });
 
 const schema = z.object({
   name: z.string(),
   email: z.string().email(),
+});
+
+router.get("/user/many", async (ctx, next) => {
+  await next();
+
+  const user = manySchema.parse(ctx.query);
+
+  const data = await prisma.user.findMany({
+    where: {
+      name: user.name ? { contains: user.name } : void 0,
+    },
+    take: user.pageSize,
+    skip: (user.page - 1) * user.pageSize,
+  });
+
+  ctx.body = data;
+});
+
+const manySchema = z.object({
+  name: z.string().optional(),
+  page: z
+    .string()
+    .default("1")
+    .transform(Number)
+    .refine(
+      (value) => {
+        return z.number().safeParse(Number(value)).success;
+      },
+      {
+        message: "excepted a int",
+      },
+    ),
+  pageSize: z
+    .string()
+    .default("20")
+    .transform(Number)
+    .refine(
+      (value) => {
+        return z.number().safeParse(Number(value)).success;
+      },
+      {
+        message: "excepted a int",
+      },
+    ),
+});
+
+router.get("/user/:id", async (ctx, next) => {
+  await next();
+
+  const params = oneSchema.parse(ctx.params);
+
+  const data = await prisma.user.findUnique({
+    where: {
+      id: params.id,
+    },
+  });
+
+  if (!data) {
+    throw new Error("Not found");
+  }
+
+  ctx.body = data;
+});
+
+const oneSchema = z.object({
+  id: z
+    .string()
+    .transform(Number)
+    .refine(
+      (value) => {
+        return z.number().safeParse(value).success;
+      },
+      {
+        message: "excepted a int",
+      },
+    ),
 });

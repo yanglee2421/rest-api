@@ -26,7 +26,10 @@
     "typescript": "^5.4.2"
   },
   "dependencies": {
+    "@prisma/client": "^5.11.0",
     "axios": "^1.6.7",
-    "formidable": "^3.5.1"
+    "formidable": "^3.5.1",
+    "prisma": "^5.11.0",
+    "zod": "^3.22.4"
   }
 }

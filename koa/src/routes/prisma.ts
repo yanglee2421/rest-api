@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
 import Router from "@koa/router";
+import { PrismaClient } from "@prisma/client";
 import { z } from "zod";
 
 export const router = new Router({ prefix: "/prisma" });
@@ -25,7 +25,7 @@ const schema = z.object({
   email: z.string().email(),
 });
 
-router.get("/user/many", async (ctx, next) => {
+router.get("/user", async (ctx, next) => {
   await next();
 
   const user = manySchema.parse(ctx.query);
@@ -91,8 +91,10 @@ const oneSchema = z.object({
       (value) => {
         return z.number().safeParse(value).success;
       },
-      {
-        message: "excepted a int",
+      (value) => {
+        return {
+          message: value + "is not a int",
+        };
       },
     ),
 });

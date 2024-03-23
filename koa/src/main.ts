@@ -6,9 +6,9 @@ import * as kolorist from "kolorist";
 import { errorHandler } from "@koa/middleware/errorHandler";
 import { log } from "@koa/middleware/log";
 import { chat } from "@koa/routes/chat";
+import { router as prismaRouter } from "@koa/routes/prisma";
 import { stream } from "@koa/routes/stream";
 import { upload } from "@koa/routes/upload";
-import { router as prismaRouter } from "@koa/routes/prisma";
 
 const app = new Koa();
 

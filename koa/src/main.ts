@@ -6,14 +6,13 @@ import * as kolorist from "kolorist";
 import { errorHandler } from "@koa/middleware/errorHandler";
 import { log } from "@koa/middleware/log";
 import { chat } from "@koa/routes/chat";
-import { router as prismaRouter } from "@koa/routes/prisma";
 import { stream } from "@koa/routes/stream";
 import { upload } from "@koa/routes/upload";
+import { userRouter } from "@koa/routes/user";
 
 const app = new Koa();
 
 app.use(errorHandler());
-
 app.use(log());
 app.use(bodyParser());
 app.use(
@@ -27,7 +26,7 @@ app.use(
 app.use(chat.routes());
 app.use(upload.routes());
 app.use(stream.routes());
-app.use(prismaRouter.routes());
+app.use(userRouter.routes());
 
 const port = 3002;
 createServer(app.callback()).listen(port, () => {

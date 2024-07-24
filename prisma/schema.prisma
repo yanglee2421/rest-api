@@ -7,21 +7,59 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url      = "file:./dev.db"
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
+  id                 Int                  @id @default(autoincrement())
+  email              String               @unique
+  password           String
+  name               String
+  profile            Profile?
+  posts              Post[]
+  comments           Comment[]
+  organization       Organization[]
+  OrganizationToUser OrganizationToUser[]
+  invitedBy          Int?
+  invitee            User[]               @relation("invite")
+  invited            User?                @relation("invite", fields: [invitedBy], references: [id])
+}
+
+model Profile {
+  id     Int  @id() @default(autoincrement())
+  userId Int  @unique
+  user   User @relation(fields: [userId], references: [id])
 }
 
 model Post {
-  id        Int     @id @default(autoincrement())
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User    @relation(fields: [authorId], references: [id])
-  authorId  Int
+  id       Int       @id() @default(autoincrement())
+  title    String
+  authorId Int
+  author   User      @relation(fields: [authorId], references: [id])
+  comments Comment[]
+}
+
+model Comment {
+  id       Int    @id() @default(autoincrement())
+  text     String
+  authorId Int
+  author   User   @relation(fields: [authorId], references: [id])
+  postId   Int
+  post     Post   @relation(fields: [postId], references: [id])
+}
+
+model Organization {
+  id                 Int                  @id() @default(autoincrement())
+  name               String
+  users              User[]
+  OrganizationToUser OrganizationToUser[]
+}
+
+model OrganizationToUser {
+  organizationId Int
+  organization   Organization @relation(fields: [organizationId], references: [id])
+  userId         Int
+  user           User         @relation(fields: [userId], references: [id])
+
+  @@id([organizationId, userId])
 }

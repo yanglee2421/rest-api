@@ -30,5 +30,5 @@ app.use(userRouter.routes());
 
 const port = 3002;
 createServer(app.callback()).listen(port, () => {
-  console.log("stand by " + kolorist.blue("http://localhost:" + port));
+  console.log(`stand by ${kolorist.blue(`http://localhost:${port}`)}`);
 });

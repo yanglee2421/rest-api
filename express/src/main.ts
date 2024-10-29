@@ -6,6 +6,7 @@ import cors from "cors";
 import express from "express";
 import { errorHandler } from "@express/middleware/errorHandler";
 import { gzipHandle } from "@express/middleware/gzipHandle";
+import { WebSocket, WebSocketServer } from "ws";
 
 const app = express();
 
@@ -21,7 +22,26 @@ app.use(
 
 app.use(errorHandler());
 
-const port = 3001;
-createServer(app).listen(port, () => {
+const server = createServer(app);
+const wss = new WebSocketServer({ server });
+let data = "msg";
+
+wss.on("connection", (ws) => {
+  ws.on("error", console.error);
+  ws.on("message", (message) => {
+    data = message.toString();
+
+    wss.clients.forEach((client) => {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(data);
+      }
+    });
+  });
+
+  ws.send(data);
+});
+
+const port = 8080;
+server.listen(port, () => {
   console.info("standing by", port);
 });

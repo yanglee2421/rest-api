@@ -23,6 +23,9 @@ importers:
       prisma:
         specifier: ^5.18.0
         version: 5.18.0
+      ws:
+        specifier: ^8.18.0
+        version: 8.18.0
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -33,12 +36,12 @@ importers:
       '@types/node':
         specifier: ^20.16.1
         version: 20.16.1
+      '@types/ws':
+        specifier: ^8.5.12
+        version: 8.5.12
       nodemon:
         specifier: ^3.1.4
         version: 3.1.4
-      prettier:
-        specifier: ^3.3.3
-        version: 3.3.3
       tsx:
         specifier: ^4.19.0
         version: 4.19.0
@@ -718,6 +721,7 @@ packages:
   '@koa/router@12.0.1':
     resolution: {integrity: sha512-ribfPYfHb+Uw3b27Eiw6NPqjhIhTpVFzEWLwyc/1Xp+DCdwRRyIlAUODX+9bPARF6aQtUu1+/PHzdNvRzcs/+Q==}
     engines: {node: '>= 12'}
+    deprecated: Use v12.0.2 or higher to fix the vulnerability issue
 
   '@lukeed/csprng@1.1.0':
     resolution: {integrity: sha512-Z7C/xXCiGWsg0KuKsHTKJxbWhpI3Vs5GwLfOean7MGyVFGqdRgBbAjOCh6u4bbjPc/8MJ2pZmK/0DLdCbivLDA==}
@@ -1119,6 +1123,9 @@ packages:
 
   '@types/validator@13.11.1':
     resolution: {integrity: sha512-d/MUkJYdOeKycmm75Arql4M5+UuXmf4cHdHKsyw1GcvnNgL6s77UkgSgJ8TE/rI5PYsnwYq5jkcWBLuN/MpQ1A==}
+
+  '@types/ws@8.5.12':
+    resolution: {integrity: sha512-3tPRkv1EtkDpzlgyKyI8pGsGZAGPEaXeu0DOj5DI25Ja91bdAYddYHbADRYVrZMRbfW+1l5YwXVDKohDJNQxkQ==}
 
   '@types/yargs-parser@21.0.0':
     resolution: {integrity: sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA==}
@@ -3141,11 +3148,6 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
 
-  prettier@3.3.3:
-    resolution: {integrity: sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==}
-    engines: {node: '>=14'}
-    hasBin: true
-
   pretty-format@29.6.3:
     resolution: {integrity: sha512-ZsBgjVhFAj5KeK+nHfF1305/By3lechHQSMWCTl8iHSbfOm2TN5nHEtFc/+W7fAyUeCs2n5iow72gld4gW0xDw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
@@ -3940,6 +3942,18 @@ packages:
     peerDependencies:
       bufferutil: ^4.0.1
       utf-8-validate: ^5.0.2
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+
+  ws@8.18.0:
+    resolution: {integrity: sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: '>=5.0.2'
     peerDependenciesMeta:
       bufferutil:
         optional: true
@@ -5093,6 +5107,10 @@ snapshots:
       '@types/superagent': 4.1.18
 
   '@types/validator@13.11.1': {}
+
+  '@types/ws@8.5.12':
+    dependencies:
+      '@types/node': 20.16.1
 
   '@types/yargs-parser@21.0.0': {}
 
@@ -7531,8 +7549,6 @@ snapshots:
 
   prettier@3.0.3: {}
 
-  prettier@3.3.3: {}
-
   pretty-format@29.6.3:
     dependencies:
       '@jest/schemas': 29.6.3
@@ -8320,6 +8336,8 @@ snapshots:
       signal-exit: 3.0.7
 
   ws@8.11.0: {}
+
+  ws@8.18.0: {}
 
   xtend@4.0.2: {}
 

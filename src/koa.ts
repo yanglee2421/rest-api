@@ -4,11 +4,11 @@ import Koa from "koa";
 import bodyParser from "koa-bodyparser";
 import * as kolorist from "kolorist";
 import Router from "@koa/router";
-import { timeout } from "@utils/timeout";
+import { timeout } from "@/lib/timeout";
 import { PrismaClient } from "@prisma/client";
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import { toParseForm } from "@utils/toParseForm";
+import { toParseForm } from "@/lib/toParseForm";
 import { PassThrough } from "node:stream";
 import { HttpError } from "koa";
 

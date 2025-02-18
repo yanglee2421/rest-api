@@ -10,7 +10,7 @@ import cors from "cors";
 import express, { Router } from "express";
 import type { RequestHandler, ErrorRequestHandler } from "express";
 import { WebSocket, WebSocketServer } from "ws";
-import { timeout } from "@utils/timeout";
+import { timeout } from "@/lib/timeout";
 
 function errorHandler(): ErrorRequestHandler {
   return async (err, req, res, next) => {

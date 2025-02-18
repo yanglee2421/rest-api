@@ -2,10 +2,10 @@ import { PrismaClient } from "@prisma/client";
 
 const prismaClient = new PrismaClient();
 
-prismaClient.$transaction(async () => {
-  await prismaClient.user.upsert({
+prismaClient.$transaction(async (client) => {
+  await client.user.upsert({
     where: {
-      id: 5,
+      id: 6,
     },
     create: {
       name: "Users" + Date.now(),
@@ -21,7 +21,7 @@ prismaClient.$transaction(async () => {
     },
   });
 
-  const userOne = await prismaClient.user.findUniqueOrThrow({
+  const userOne = await client.user.findUniqueOrThrow({
     where: {
       id: 1,
     },

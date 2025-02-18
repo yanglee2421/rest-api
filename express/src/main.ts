@@ -128,7 +128,7 @@ hmisRouter.post("/api/saveData", (req, res) => {
   const type = url.searchParams.get("type");
   if (type !== "csbts") throw new Error("type field is not csbts");
 
-  console.log(req.body);
+  console.log("req.body", req.body, req.headers["content-type"]);
 
   res.json({
     code: "200",

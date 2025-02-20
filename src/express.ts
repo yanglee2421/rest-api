@@ -90,9 +90,15 @@ const routerStream = Router();
 const hmisRouter = Router();
 const khHmisRouter = Router();
 
+type KhGetBody = {
+  mesureId: "A23051641563052";
+};
+
 khHmisRouter.post("/api/lzdx_csbtsj_get/get", (req, res) => {
-  //
   const url = new URL(req.url, `http://${req.hostname}:${PORT}`);
+  const data = req.body as KhGetBody;
+
+  console.log(data, req.headers["content-type"], url.href);
 
   res.json({
     data: {
@@ -105,20 +111,32 @@ khHmisRouter.post("/api/lzdx_csbtsj_get/get", (req, res) => {
       czzzdw: "673",
       ldszrq: "2014-06-22",
       ldszdw: "673",
-      ldmzrq: "20 18-04-13",
+      ldmzrq: "2018-04-13",
       ldmzdw: "623",
     },
     code: 200,
     msg: "success",
   });
 });
-khHmisRouter.post("/api/lzdx_csbtsj_get/get", (req, res) => {
-  //
+khHmisRouter.post("/api/lzdx_csbtsj_tsjg/save", (req, res) => {
   const url = new URL(req.url, `http://${req.hostname}:${PORT}`);
+
+  console.log(req.body, req.headers["content-type"], url.href);
+
+  res.json({
+    code: 200,
+    msg: "success",
+  });
 });
-khHmisRouter.post("/api/lzdx_csbtsj_get/get", (req, res) => {
-  //
+khHmisRouter.post("/api/lzdx_csbtsj_whzy_tsjgqx/save", (req, res) => {
   const url = new URL(req.url, `http://${req.hostname}:${PORT}`);
+
+  console.log(req.body, req.headers["content-type"], url.href);
+
+  res.json({
+    code: 200,
+    msg: "success",
+  });
 });
 
 hmisRouter.get("/api/getData", (req, res) => {

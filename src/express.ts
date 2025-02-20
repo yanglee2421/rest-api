@@ -88,6 +88,38 @@ const PORT = 8080;
 const file = Router();
 const routerStream = Router();
 const hmisRouter = Router();
+const khHmisRouter = Router();
+
+khHmisRouter.post("/api/lzdx_csbtsj_get/get", (req, res) => {
+  //
+  const url = new URL(req.url, `http://${req.hostname}:${PORT}`);
+
+  res.json({
+    data: {
+      mesureId: "A23051641563052",
+      zh: "10911",
+      zx: "RE2B",
+      clbjLeft: "HEZD Ⅱ 18264",
+      clbjRight: "HEZD Ⅱ 32744",
+      czzzrq: "2003-01-16",
+      czzzdw: "673",
+      ldszrq: "2014-06-22",
+      ldszdw: "673",
+      ldmzrq: "20 18-04-13",
+      ldmzdw: "623",
+    },
+    code: 200,
+    msg: "success",
+  });
+});
+khHmisRouter.post("/api/lzdx_csbtsj_get/get", (req, res) => {
+  //
+  const url = new URL(req.url, `http://${req.hostname}:${PORT}`);
+});
+khHmisRouter.post("/api/lzdx_csbtsj_get/get", (req, res) => {
+  //
+  const url = new URL(req.url, `http://${req.hostname}:${PORT}`);
+});
 
 hmisRouter.get("/api/getData", (req, res) => {
   // ?type=csbts&param=91022070168
@@ -97,8 +129,12 @@ hmisRouter.get("/api/getData", (req, res) => {
 
   const param = url.searchParams.get("param");
   if (!param) throw new Error("param is falsy");
-
   console.log(param);
+
+  const [barCode, unitCode] = param.split(",");
+  console.log(barCode, unitCode);
+  if (!barCode) throw new Error("barCode is falsy");
+  if (!unitCode) throw new Error("unitCode is falsy");
 
   res.json({
     code: "200",
@@ -198,7 +234,7 @@ app.use(
 );
 
 app.use(hmisRouter);
-
+app.use(khHmisRouter);
 app.use(errorHandler());
 
 const server = createServer(app);
